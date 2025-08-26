@@ -1910,7 +1910,7 @@ $evaluation_info_078 = "Commentaire sur le malt, les houblons, les caractéristi
 $evaluation_info_079 = "Commentaire sur le corps, la carbonatation, la chaleur, la crémosité, l'astringence et d'autres sensations en bouche.";
 $evaluation_info_080 = "Commentaire sur le plaisir de dégustation global associé à l'entrée, donnez des suggestions d'amélioration.";
 
-if ((isset($_SESSION['prefsStyleSet'])) && ($_SESSION['prefsStyleSet'] == "BJCP2021")) {
+if ((isset($_SESSION['prefsStyleSet'])) && (($_SESSION['prefsStyleSet'] == "BJCP2021") || ($_SESSION['prefsStyleSet'] == "BJCP2025"))) {
     $styles_entry_text_21B = "Le participant DOIT spécifier une force (session, standard, double) ; si aucune force n'est spécifiée, la force standard sera supposée. Le participant DOIT spécifier le type spécifique de Specialty IPA à partir de la liste des types actuellement définis identifiés dans les directives de style, ou tel que modifié par les styles provisoires sur le site Web de la BJCP ; OU le participant DOIT décrire le type de Specialty IPA et ses caractéristiques clés dans un commentaire afin que les juges sachent à quoi s'attendre. Les participants PEUVENT spécifier les variétés spécifiques de houblon utilisées, si les participants estiment que les juges pourraient ne pas reconnaître les caractéristiques variétales des houblons plus récents. Les participants PEUVENT spécifier une combinaison de types IPA définis (par exemple, Black Rye IPA) sans fournir de descriptions supplémentaires.";
 
     $styles_entry_text_24C = "Le participant DOIT spécifier une Bière de Garde blonde, ambrée ou brune.";

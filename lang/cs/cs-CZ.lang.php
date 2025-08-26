@@ -1827,8 +1827,7 @@ $evaluation_info_078 = "Komentář ke sladu, chmelu, kvasným vlastnostem, vyvá
 $evaluation_info_079 = "Komentujte tělo, nasycení, hřejivost, krémovitost, trpkost a další chuťové vjemy.";
 $evaluation_info_080 = "Okomentujte celkový požitek z pití spojený se vzorkem, uveďte návrhy na zlepšení.";
 
-
-if ($_SESSION['prefsStyleSet'] == "BJCP2021") {
+if ((isset($_SESSION['prefsStyleSet'])) && (($_SESSION['prefsStyleSet'] == "BJCP2021") || ($_SESSION['prefsStyleSet'] == "BJCP2025"))) {
     $styles_entry_text_21B = "Účastník MUSÍ zadat sílu (session, standard, double); pokud sílu nezadá, předpokládá se, že je standardní. Účastník MUSÍ uvést konkrétní typ Specialty IPA ze seznamu ve Style Guidelines nebo Provisonal Styles na internetových stránkách BJCP; NEBO MUSÍ popsat styl Specialty IPA a jeho klíčové vlastnosti formou komentáře, aby degustátoři věděli, co mají očekávat. Účastníci MOHOU uvést konkrétní použité odrůdy chmele, pokud se domnívají, že degustátoři nemusí rozpoznat odrůdové vlastnosti novějších chmelů. Účastníci MOHOU uvést kombinaci definovaných typů IPA (např. Black Rye IPA) bez uvedení dalších popisů.";
     $styles_entry_text_24C = "Účastník MUSÍ uvést světlé, jantarové nebo hnědé Bière de Garde.";
     $styles_entry_text_25B = "Účastník MUSÍ uvést sílu (table, standard, super) a barvu (světlá, tmavá). Účastník MŮŽE uvést druh použitého sladu.";

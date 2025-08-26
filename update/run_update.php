@@ -4397,6 +4397,41 @@ $output_run_update .= "<li>Claussenii and Naardenensis themes are deprecated and
 if (!$setup_running) $output_run_update .= "</ul>";
 
 /**
+ * ----------------------------------------------- 2.8.0 ---------------------------------------------
+ * Add BJCP 2025 Cider Styles.
+ * Add AABC 2025 Cider Styles.
+ * Look at current cider entries and map to new style.
+ * Update Doppelbock entry instructions to "The entrant must specify whether the entry is a pale or a dark variant."
+ * ---------------------------------------------------------------------------------------------------
+ */
+
+if ((!$setup_running) && (!$update_running)) {
+	$output_run_update .= "<p>";
+	$output_run_update .= "<strong>Version 2.8.0.0 Updates</strong>";
+	$output_run_update .= "</p>";
+}
+
+elseif ($update_running) {
+	$output_run_update .= "<h4>Version 2.8.0 </h4>";
+}
+
+// Begin version unordered list
+if (!$setup_running) $output_run_update .= "<ul>";
+
+// Add BJCP 2025 Cider Updates
+if (!check_new_style("C1","E","Spanish Cider")) include (UPDATE.'styles_bjcp_2025_update.php');
+
+// Add AABC 2025 Cider Updates
+if (!check_new_style("20","05","Spanish Cider [BJCP C1E]")) include (UPDATE.'styles_aabc_2025_update.php');
+
+// Update NW Cider Cup Styles
+include (UPDATE.'styles_nw_cider_cup_2025.php');
+
+// End unordered list
+if (!$setup_running) $output_run_update .= "</ul>";
+
+
+/**
  * ----------------------------------------------- Future --------------------------------------------- 
  * Remove AABC 2021 Guidelines
  * Need to write a conversion script.

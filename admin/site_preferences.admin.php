@@ -37,7 +37,7 @@ foreach ($style_sets as $style_set) {
     
     // Build style set drop-down
     if ((isset($_SESSION['prefsStyleSet'])) && ($style_set['style_set_name'] == $_SESSION['prefsStyleSet']))  $style_set_selected = "SELECTED";
-    if (($section == "step3") && ($style_set['style_set_name'] == "BJCP2021")) $style_set_selected = "SELECTED";
+    if (($section == "step3") && ($style_set['style_set_name'] == "BJCP2025")) $style_set_selected = "SELECTED";
     $style_set_dropdown .= sprintf("<option value=\"%s\" %s>%s (%s)</option>",$style_set['style_set_name'],$style_set_selected,$style_set['style_set_long_name'],$style_set['style_set_short_name']);
 
     // Generate exception list for each of the style sets in the 
@@ -49,9 +49,14 @@ foreach ($style_sets as $style_set) {
     */
     $styles_db_table = $prefix."styles";
 
-    $query_styles_all = sprintf("SELECT id,brewStyleGroup,brewStyleNum,brewStyle,brewStyleVersion,brewStyleOwn FROM %s WHERE brewStyleVersion='%s' AND brewStyleOwn != 'custom'",$styles_db_table,$style_set['style_set_name']);
-    if ($style_set['style_set_name'] == "BA") $query_styles_all .= " ORDER BY brewStyleVersion,brewStyleGroup,brewStyle ASC";
-    else $query_styles_all .= " ORDER BY brewStyleVersion,brewStyleGroup,brewStyleNum,brewStyle ASC";
+    if ($style_set['style_set_name'] == "BJCP2025") $query_styles_all = sprintf("SELECT id,brewStyleGroup,brewStyleNum,brewStyle,brewStyleVersion,brewStyleOwn FROM %s WHERE (brewStyleVersion='BJCP2025' AND brewStyleType='2') OR (brewStyleVersion='BJCP2021' AND brewStyleType !='2') AND brewStyleOwn != 'custom'",$styles_db_table,$style_set['style_set_name']);
+    elseif ($style_set['style_set_name'] == "AABC2025") $query_styles_all = sprintf("SELECT id,brewStyleGroup,brewStyleNum,brewStyle,brewStyleVersion,brewStyleOwn FROM %s WHERE (brewStyleVersion='AABC2025' AND brewStyleType='2') OR (brewStyleVersion='AABC2022' AND brewStyleType !='2') AND brewStyleOwn != 'custom'",$styles_db_table,$style_set['style_set_name']);
+    else $query_styles_all = sprintf("SELECT id,brewStyleGroup,brewStyleNum,brewStyle,brewStyleVersion,brewStyleOwn FROM %s WHERE brewStyleVersion='%s' AND brewStyleOwn != 'custom'",$styles_db_table,$style_set['style_set_name']);
+    
+    if ($style_set['style_set_name'] == "BA") $query_styles_all .= " ORDER BY brewStyleType,brewStyleGroup,brewStyle ASC";
+    elseif (strpos($style_set['style_set_name'],"AABC") !== false) $query_styles_all .= " ORDER BY brewStyleGroup,brewStyleNum,brewStyle ASC";
+    else $query_styles_all .= " ORDER BY brewStyleType,brewStyleGroup,brewStyleNum,brewStyle ASC";
+
     $styles_all = mysqli_query($connection,$query_styles_all) or die (mysqli_error($connection));
     $row_styles_all = mysqli_fetch_assoc($styles_all);
 
@@ -435,6 +440,7 @@ $(document).ready(function(){
 
         if (entries_present > 0) {
            if ((current_style_set == "BJCP2015") && ($("#prefsStyleSet").val() == "BJCP2021")) $('#style-set-change-bjcp-2021').modal('show');
+           else if ((current_style_set == "BJCP2021") && ($("#prefsStyleSet").val() == "BJCP2025")) $('#style-set-change-bjcp-2025').modal('show');
            else {
                 if (current_style_set != $("#prefsStyleSet").val()) $('#style-set-change').modal('show');
            } 
@@ -536,6 +542,28 @@ $(document).ready(function(){
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="style-set-change-bjcp-2025" tabindex="-1" role="dialog" aria-labelledby="style-set-change-bjcp-2025-label">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="style-set-change-bjcp-2025-label">Caution! Entries Present</h4>
+      </div>
+      <div class="modal-body">
+        <p>Choosing this option incorporates the 2025 update of cider styles only. Beer and mead remain the same as defined in the 2021 and 2015 updates, respectively.</p>
+        <p>There are currently entries logged into the database from participants using previous BJCP cider styles.</p>
+        <p><strong>Cider entries</strong> that are currently in the database will be converted from the 2015 update to the 2025 update.</p>
+        <p>Additionally, preferred and non-preferred cider styles will be updated to 2025 for all judges. All defined tables incorporating cider styles will be updated as well.</p>
+        <p><strong class="text-primary">This cannot be undone.</strong></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">I Understand</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <?php } ?>
 <form data-toggle="validator" role="form" class="form-horizontal" method="post" action="<?php echo $base_url; ?>includes/process.inc.php?section=<?php if ($section == "step3") echo "setup"; else echo $section; ?>&amp;action=<?php if ($section == "step3") echo "add"; else echo "edit"; ?>&amp;dbTable=<?php echo $preferences_db_table; ?>&amp;id=1" name="form1">
 <input type="hidden" name="token" value ="<?php if (isset($_SESSION['token'])) echo $_SESSION['token']; ?>">

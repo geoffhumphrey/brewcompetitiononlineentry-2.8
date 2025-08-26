@@ -401,6 +401,60 @@ if ((isset($_SERVER['HTTP_REFERER'])) && (((isset($_SESSION['loginUsername'])) &
 			}
 
 		}
+
+		/**
+		 * If the style set has changed from BJCP 2021 to BJCP 2025, map
+		 * 2021 styles to updated 2025 styles in brewing DB.
+		 *
+		 * As a safeguard to make sure the brewing table data is updated, 
+		 * perform a query for any old styles whose names have changed and/or
+		 * whose category has changed.
+		 */
+
+		if ($prefsStyleSet == "BJCP2025") {
+
+			include (LIB.'convert.lib.php');
+			
+			if ($_SESSION['prefsStyleSet'] == "BJCP2021") {
+				include (INCLUDES.'convert/convert_bjcp_2025.inc.php');
+			}
+
+			$query_check_entry_styles = sprintf("SELECT COUNT(*) as 'count' FROM %s WHERE brewStyle='New World Perry' OR brewStyle='Traditional Perry' OR brewStyle='Specialty Cider/Perry' OR brewStyle='Cider with Herbs/Spices' OR brewStyle='Cider with Other Fruit' OR brewStyle='New World Cider'", $prefix."brewing");
+			$check_entry_styles = mysqli_query($connection,$query_check_entry_styles) or die (mysqli_error($connection));
+			$row_check_entry_styles = mysqli_fetch_assoc($check_entry_styles);
+
+			if ($row_check_entry_styles['count'] > 0) {
+				include (INCLUDES.'convert/convert_bjcp_2025.inc.php');
+			}
+
+		}
+
+		/**
+		 * If the style set has changed from AABC 2022 to AABC 2025, map
+		 * 2022 styles to updated 2025 styles in brewing DB.
+		 *
+		 * As a safeguard to make sure the brewing table data is updated, 
+		 * perform a query for any old styles whose names have changed and/or
+		 * whose category has changed.
+		 */
+
+		if ($prefsStyleSet == "AABC2025") {
+
+			include (LIB.'convert.lib.php');
+			
+			if ($_SESSION['prefsStyleSet'] == "AABC2022") {
+				include (INCLUDES.'convert/convert_aabc_2025.inc.php');
+			}
+
+			$query_check_entry_styles = sprintf("SELECT COUNT(*) as 'count' FROM %s WHERE brewStyle='New World Perry [BJCP C1D]' OR brewStyle='Traditional Perry [BJCP C1E]' OR brewStyle='Specialty Cider/Perry [BJCP C2F]' OR brewStyle='Cider with Herbs/Spices' OR brewStyle='Cider with Herbs/Spices [BJCP C2E]' OR brewStyle='New World Cider [BJCP C1A]'", $prefix."brewing");
+			$check_entry_styles = mysqli_query($connection,$query_check_entry_styles) or die (mysqli_error($connection));
+			$row_check_entry_styles = mysqli_fetch_assoc($check_entry_styles);
+
+			if ($row_check_entry_styles['count'] > 0) {
+				include (INCLUDES.'convert/convert_aabc_2025.inc.php');
+			}
+
+		}
 			
 		if ($_POST['prefsPaypalIPN'] == 1) {
 

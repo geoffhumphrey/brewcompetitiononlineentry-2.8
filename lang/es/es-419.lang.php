@@ -1903,7 +1903,7 @@ $evaluation_info_078 = "Comentario sobre malta, lúpulo, características de fer
 $evaluation_info_079 = "Comentario sobre cuerpo, carbonatación, calidez, cremosidad, astringencia y otras sensaciones en el paladar.";
 $evaluation_info_080 = "Comentario sobre el placer general de beber la entrada, da sugerencias para mejorar.";
 
-if ((isset($_SESSION['prefsStyleSet'])) && ($_SESSION['prefsStyleSet'] == "BJCP2021")) {
+if ((isset($_SESSION['prefsStyleSet'])) && (($_SESSION['prefsStyleSet'] == "BJCP2021") || ($_SESSION['prefsStyleSet'] == "BJCP2025"))) {
     $styles_entry_text_21B = "El participante DEBE especificar una fuerza (session, estándar, doble); si no se especifica una fuerza, se asumirá la estándar. El participante DEBE especificar el tipo específico de IPA Especial de la lista de Tipos Actualmente Definidos identificados en las Pautas de Estilo, o según enmiendas de Estilos Provisionales en el sitio web de BJCP; O el participante DEBE describir el tipo de IPA Especial y sus características clave en forma de comentario para que los jueces sepan qué esperar. Los participantes PUEDEN especificar variedades de lúpulo específicas utilizadas, si los participantes creen que los jueces pueden no reconocer las características varietales de lúpulos más nuevos. Los participantes PUEDEN especificar una combinación de tipos de IPA definidos (por ejemplo, IPA Negra de Centeno) sin proporcionar descripciones adicionales.";
     $styles_entry_text_24C = "El participante DEBE especificar si es rubia, ámbar o marrón Bière de Garde.";
     $styles_entry_text_25B = "El participante DEBE especificar la fuerza (mesa, estándar, súper) y el color (pálido, oscuro). El participante PUEDE identificar granos característicos utilizados.";

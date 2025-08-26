@@ -1370,11 +1370,12 @@ function style_convert($number,$type,$base_url="",$archive="") {
 
 	mysqli_select_db($connection,$database);
 
-	/*
-	if (HOSTED) $query_style = sprintf("SELECT brewStyleNum,brewStyleGroup,brewStyle,brewStyleVersion,brewStyleReqSpec,brewStyleOwn FROM %s WHERE brewStyleGroup='%s' AND (brewStyleVersion='%s' OR brewStyleOwn='custom') UNION ALL SELECT brewStyleNum,brewStyleGroup,brewStyle,brewStyleVersion,brewStyleReqSpec,brewStyleOwn FROM %s WHERE brewStyleGroup='%s' AND (brewStyleVersion='%s' OR brewStyleOwn='custom')", $prefix."styles", $number, $style_set, $styles_db_table, $number, $style_set);
-	else 
-	*/
-	$query_style = sprintf("SELECT brewStyleNum,brewStyleGroup,brewStyle,brewStyleVersion,brewStyleReqSpec,brewStyleOwn FROM %s WHERE brewStyleGroup='%s' AND (brewStyleVersion='%s' OR brewStyleOwn='custom')", $styles_db_table, $number, $style_set);
+	if ($style_set == "BJCP2025") {
+		$first_character = mb_substr($number, 0, 1);
+		if ($first_character == "C") $query_style = sprintf("SELECT brewStyleNum,brewStyleGroup,brewStyle,brewStyleVersion,brewStyleReqSpec,brewStyleOwn FROM %s WHERE brewStyleGroup='%s' AND brewStyleVersion='BJCP2025'",$styles_db_table,$number);
+		else $query_style = sprintf("SELECT brewStyleNum,brewStyleGroup,brewStyle,brewStyleVersion,brewStyleReqSpec,brewStyleOwn FROM %s WHERE brewStyleGroup='%s' AND brewStyleVersion='BJCP2021'",$styles_db_table,$number);
+	}
+	else $query_style = sprintf("SELECT brewStyleNum,brewStyleGroup,brewStyle,brewStyleVersion,brewStyleReqSpec,brewStyleOwn FROM %s WHERE brewStyleGroup='%s' AND (brewStyleVersion='%s' OR brewStyleOwn='custom')", $styles_db_table, $number, $style_set);
 	$style = mysqli_query($connection,$query_style) or die (mysqli_error($connection));
 	$row_style = mysqli_fetch_assoc($style);
 
@@ -1763,12 +1764,12 @@ function style_convert($number,$type,$base_url="",$archive="") {
 		$style_name = "";
 		$number = explode("^",$number);
 		
-		/*
-		if (HOSTED) $query_style = sprintf("SELECT brewStyleNum, brewStyleGroup, brewStyle, brewStyleVersion, brewStyleReqSpec, brewStyleStrength, brewStyleCarb,brewStyleSweet FROM %s WHERE brewStyleGroup='%s' AND 
-			brewStyleNum='%s' AND (brewStyleVersion='%s' OR brewStyleOwn='custom') UNION ALL SELECT brewStyleNum, brewStyleGroup, brewStyle, brewStyleVersion, brewStyleReqSpec, brewStyleStrength,brewStyleCarb,brewStyleSweet FROM %s WHERE brewStyleGroup='%s' AND brewStyleNum='%s' AND (brewStyleVersion='%s' OR brewStyleOwn='custom');", $styles_db_table, $number[0], $number[1], $number[2], $prefix."styles", $number[0], $number[1], $number[2]);
-		else 
-		*/
-		$query_style = sprintf("SELECT brewStyleNum,brewStyleGroup,brewStyle,brewStyleVersion,brewStyleReqSpec,brewStyleStrength,brewStyleCarb,brewStyleSweet FROM %s WHERE brewStyleGroup='%s' AND brewStyleNum='%s' AND (brewStyleVersion='%s' OR brewStyleOwn='custom')",$styles_db_table,$number[0],$number[1],$number[2]);
+		if ($number[2] == "BJCP2025") {
+			$first_character = mb_substr($number[0], 0, 1);
+			if ($first_character == "C") $query_style = sprintf("SELECT brewStyleNum,brewStyleGroup,brewStyle,brewStyleVersion,brewStyleReqSpec,brewStyleStrength,brewStyleCarb,brewStyleSweet FROM %s WHERE brewStyleGroup='%s' AND brewStyleNum='%s' AND (brewStyleVersion='BJCP2025' OR brewStyleOwn='custom')",$styles_db_table,$number[0],$number[1]);
+			else $query_style = sprintf("SELECT brewStyleNum,brewStyleGroup,brewStyle,brewStyleVersion,brewStyleReqSpec,brewStyleStrength,brewStyleCarb,brewStyleSweet FROM %s WHERE brewStyleGroup='%s' AND brewStyleNum='%s' AND (brewStyleVersion='BJCP2021' OR brewStyleOwn='custom')",$styles_db_table,$number[0],$number[1]);
+		}
+		else $query_style = sprintf("SELECT brewStyleNum,brewStyleGroup,brewStyle,brewStyleVersion,brewStyleReqSpec,brewStyleStrength,brewStyleCarb,brewStyleSweet FROM %s WHERE brewStyleGroup='%s' AND brewStyleNum='%s' AND (brewStyleVersion='%s' OR brewStyleOwn='custom')",$styles_db_table,$number[0],$number[1],$number[2]);
 		$style = mysqli_query($connection,$query_style) or die (mysqli_error($connection));
 		$row_style = mysqli_fetch_assoc($style);
 
@@ -2828,11 +2829,23 @@ function check_special_ingredients($style,$style_version) {
 	if (HOSTED) $query_brews = sprintf("SELECT brewStyleReqSpec FROM %s WHERE (brewStyleVersion='%s' OR brewStyleOwn='custom') AND brewStyleGroup='%s' AND brewStyleNum='%s' UNION ALL SELECT brewStyleReqSpec FROM %s WHERE (brewStyleVersion='%s' OR brewStyleOwn='custom') AND brewStyleGroup='%s' AND brewStyleNum='%s'", $styles_db_table, $style_version, $style_explodies[0], $style_explodies[1], $prefix."styles", $style_version, $style_explodies[0], $style_explodies[1]);
 	else 
 	*/
-	$query_brews = sprintf("SELECT brewStyleReqSpec FROM %s WHERE (brewStyleVersion='%s' OR brewStyleOwn='custom') AND brewStyleGroup='%s' AND brewStyleNum='%s'", $styles_db_table, $style_version, $style_explodies[0], $style_explodies[1]);
+	if ($style_version == "BJCP2025") {
+		$first_character = mb_substr($style, 0, 1);
+		if ($first_character == "C") $query_brews = sprintf("SELECT brewStyleReqSpec FROM %s WHERE (brewStyleVersion='BJCP2025' OR brewStyleOwn='custom') AND brewStyleGroup='%s' AND brewStyleNum='%s'", $styles_db_table, $style_explodies[0], $style_explodies[1]);
+		else $query_brews = sprintf("SELECT brewStyleReqSpec FROM %s WHERE (brewStyleVersion='%s' OR brewStyleOwn='custom') AND brewStyleGroup='%s' AND brewStyleNum='%s'", $styles_db_table, $style_version, $style_explodies[0], $style_explodies[1]);
+	}
+	else $query_brews = sprintf("SELECT brewStyleReqSpec FROM %s WHERE (brewStyleVersion='%s' OR brewStyleOwn='custom') AND brewStyleGroup='%s' AND brewStyleNum='%s'", $styles_db_table, $style_version, $style_explodies[0], $style_explodies[1]);
 	$brews = mysqli_query($connection,$query_brews) or die (mysqli_error($connection));
 	$row_brews = mysqli_fetch_assoc($brews);
 
-	if ((!empty($row_brews)) && ($row_brews['brewStyleReqSpec'] == 1)) return TRUE;
+	if ((!empty($row_brews)) && ($row_brews['brewStyleReqSpec'] == 1)) {
+		
+		// Execptions for some selected 2025 cider styles
+		if (($style_version == "BJCP2025") && (($style == "C2-C") || ($style == "C2-D") || ($style == "C4-C"))) return FALSE;
+		else return TRUE;
+	
+	}
+
 	else return FALSE;
 
 }
@@ -4425,7 +4438,7 @@ function style_number_const($style_category_number,$style_sub,$style_set_display
 		case 0:
 			if (isset($_SESSION['prefsStyleSet'])) {
 				if ($_SESSION['prefsStyleSet'] == "BA") return "";
-				elseif (($_SESSION['prefsStyleSet'] == "BJCP2021") || ($_SESSION['prefsStyleSet'] == "BJCP2015")) return ltrim($style_category_number,"0").$style_set_display_separator.ltrim($style_sub,"0");
+				elseif (($_SESSION['prefsStyleSet'] == "BJCP2021") || ($_SESSION['prefsStyleSet'] == "BJCP2025")) return ltrim($style_category_number,"0").$style_set_display_separator.ltrim($style_sub,"0");
 				else return $style_category_number.$style_set_display_separator.$style_sub;
 			}
 			else return "";

@@ -1894,7 +1894,7 @@ $evaluation_info_077 = "Comment on color, clarity, and head (retention, color, a
 $evaluation_info_078 = "Comment on malt, hops, fermentation characteristics, balance, finish/aftertaste, and other flavor characteristics.";
 $evaluation_info_079 = "Comment on body, carbonation, warmth, creaminess, astringency, and other palate sensations.";
 $evaluation_info_080 = "Comment on overall drinking pleasure associated with entry, give suggestions for improvement.";
-if ((isset($_SESSION['prefsStyleSet'])) && ($_SESSION['prefsStyleSet'] == "BJCP2021")) {
+if ((isset($_SESSION['prefsStyleSet'])) && (($_SESSION['prefsStyleSet'] == "BJCP2021") || ($_SESSION['prefsStyleSet'] == "BJCP2025"))) {
     $styles_entry_text_21B = "Entrant MUST specify a strength (session, standard, double); if no strength is specified, standard will be assumed. Entrant MUST specify specific type of Specialty IPA from the list of Currently Defined Types identified in the Style Guidelines, or as amended by Provisional Styles on the BJCP website; OR the entrant MUST describe the type of Specialty IPA and its key characteristics in comment form so judges will know what to expect. Entrants MAY specify specific hop varieties used, if entrants feel that judges may not recognize the varietal characteristics of newer hops. Entrants MAY specify a combination of defined IPA types (e.g., Black Rye IPA) without providing additional descriptions.";
     $styles_entry_text_24C = "Entrant MUST specify blond, amber, or brown Bière de Garde.";
     $styles_entry_text_25B = "The entrant MUST specify the strength (table, standard, super) and the color (pale, dark). The entrant MAY identify character grains used.";

@@ -26,134 +26,214 @@ $replacement3 = array('Entry Instructions:','Commercial Examples:','<strong><u>M
 $replacement4 = array('must specify','may specify','MUST specify','MAY specify','must provide','must be specified','must declare','must either','must supply','may provide','MUST state');
 $replacement5 = array('<strong><u>MUST</u></strong> specify','<strong><u>MAY</u></strong> specify (using the <em>Optional Info</em> field below)','<strong><u>MUST</u></strong> specify','<strong><u>MAY</u></strong> specify (using the <em>Optional Info</em> field below)','<strong><u>MUST</u></strong> provide','<strong><u>MUST</u></strong> be specified','<strong><u>MUST</u></strong> declare','<strong><u>MUST</u></strong> either','<strong><u>MUST</u></strong> supply','<strong><u>MAY</u></strong> provide (using the <em>Optional Info</em> field below)','<strong><u>MUST</u></strong> state');
 
-if (($_SESSION['prefsLanguage'] == "en-US") && (($_SESSION['prefsStyleSet'] == "BJCP2015") || ($_SESSION['prefsStyleSet'] == "BJCP2021"))) {
-	$styles_entry_text = array(
-	    "7-C" => str_replace($replacement4,$replacement5,$styles_entry_text_07C),
-	    "9-A" => str_replace($replacement4,$replacement5,$styles_entry_text_09A),
-	    "10-C" => str_replace($replacement4,$replacement5,$styles_entry_text_10C),
-	    "21-B" => str_replace($replacement4,$replacement5,$styles_entry_text_21B),
-	    "23-F" => str_replace($replacement4,$replacement5,$styles_entry_text_23F),
-	    "24-C" => str_replace($replacement4,$replacement5,$styles_entry_text_24C),
-	    "25-B" => str_replace($replacement4,$replacement5,$styles_entry_text_25B),
-	    "27-A" => str_replace($replacement4,$replacement5,$styles_entry_text_27A),
-	    "28-A" => str_replace($replacement4,$replacement5,$styles_entry_text_28A),
-	    "28-B" => str_replace($replacement4,$replacement5,$styles_entry_text_28C),
-	    "29-A" => str_replace($replacement4,$replacement5,$styles_entry_text_29A),
-	    "29-B" => str_replace($replacement4,$replacement5,$styles_entry_text_29B),
-	    "29-C" => str_replace($replacement4,$replacement5,$styles_entry_text_29C),
-	    "30-A" => str_replace($replacement4,$replacement5,$styles_entry_text_30A),
-	    "30-B" => str_replace($replacement4,$replacement5,$styles_entry_text_30B),
-	    "30-C" => str_replace($replacement4,$replacement5,$styles_entry_text_30C),
-	    "31-A" => str_replace($replacement4,$replacement5,$styles_entry_text_30A),
-	    "31-B" => str_replace($replacement4,$replacement5,$styles_entry_text_31B),
-	    "32-A" => str_replace($replacement4,$replacement5,$styles_entry_text_32A),
-	    "32-B" => str_replace($replacement4,$replacement5,$styles_entry_text_32B),
-	    "33-A" => str_replace($replacement4,$replacement5,$styles_entry_text_33A),
-	    "33-B" => str_replace($replacement4,$replacement5,$styles_entry_text_33B),
-	    "34-A" => str_replace($replacement4,$replacement5,$styles_entry_text_34A),
-	    "34-B" => str_replace($replacement4,$replacement5,$styles_entry_text_34B),
-	    "34-C" => str_replace($replacement4,$replacement5,$styles_entry_text_34C),
-	    "M1-A" => str_replace($replacement4,$replacement5,$styles_entry_text_M1A),
-	    "M1-B" => str_replace($replacement4,$replacement5,$styles_entry_text_M1B),
-	    "M1-C" => str_replace($replacement4,$replacement5,$styles_entry_text_M1C),
-	    "M2-A" => str_replace($replacement4,$replacement5,$styles_entry_text_M2A),
-	    "M2-B" => str_replace($replacement4,$replacement5,$styles_entry_text_M2B),
-	    "M2-C" => str_replace($replacement4,$replacement5,$styles_entry_text_M2C),
-	    "M2-D" => str_replace($replacement4,$replacement5,$styles_entry_text_M2D),
-	    "M2-E" => str_replace($replacement4,$replacement5,$styles_entry_text_M2E),
-	    "M3-A" => str_replace($replacement4,$replacement5,$styles_entry_text_M3A),
-	    "M3-B" => str_replace($replacement4,$replacement5,$styles_entry_text_M3B),
-	    "M4-A" => str_replace($replacement4,$replacement5,$styles_entry_text_M4A),
-	    "M4-B" => str_replace($replacement4,$replacement5,$styles_entry_text_M4B),
-	    "M4-C" => str_replace($replacement4,$replacement5,$styles_entry_text_M4C),
-	    "C1-A" => str_replace($replacement4,$replacement5,$styles_entry_text_C1A),
-	    "C1-B" => str_replace($replacement4,$replacement5,$styles_entry_text_C1B),
-	    "C1-C" => str_replace($replacement4,$replacement5,$styles_entry_text_C1C),
-	    "C1-E" => str_replace($replacement4,$replacement5,$styles_entry_text_C1E),
-	    "C2-A" => str_replace($replacement4,$replacement5,$styles_entry_text_C2A),
-	    "C2-B" => str_replace($replacement4,$replacement5,$styles_entry_text_C2B),
-	    "C2-C" => str_replace($replacement4,$replacement5,$styles_entry_text_C2C),
-	    "C2-D" => str_replace($replacement4,$replacement5,$styles_entry_text_C2D),
-	    "C2-E" => str_replace($replacement4,$replacement5,$styles_entry_text_C2E),
-	    "C2-F" => str_replace($replacement4,$replacement5,$styles_entry_text_C2F),
-	    "21-B1" => str_replace($replacement4,$replacement5,$styles_entry_text_21X),
-	    "21-B2" => str_replace($replacement4,$replacement5,$styles_entry_text_21X),
-	    "21-B3" => str_replace($replacement4,$replacement5,$styles_entry_text_21X),
-	    "21-B4" => str_replace($replacement4,$replacement5,$styles_entry_text_21X),
-	    "21-B5" => str_replace($replacement4,$replacement5,$styles_entry_text_21X),
-	    "21-B6" => str_replace($replacement4,$replacement5,$styles_entry_text_21X),
-	    "21-B7" => str_replace($replacement4,$replacement5,$styles_entry_text_21X),
-	    "PR-X3" => str_replace($replacement4,$replacement5,$styles_entry_text_PRX3),
-	    "PR-X4" => str_replace($replacement4,$replacement5,$styles_entry_text_PRX4),
-	    "LS-X3" => str_replace($replacement4,$replacement5,$styles_entry_text_PRX3),
-	    "LS-X4" => str_replace($replacement4,$replacement5,$styles_entry_text_PRX4),
-	);
+if ($_SESSION['prefsLanguage'] == "en-US") {
+
+	if (($_SESSION['prefsStyleSet'] == "BJCP2021") || ($_SESSION['prefsStyleSet'] == "BJCP2025")) {
+		
+		$styles_entry_text = array(
+		    "7-C" => str_replace($replacement4,$replacement5,$styles_entry_text_07C),
+		    "9-A" => str_replace($replacement4,$replacement5,$styles_entry_text_09A),
+		    "10-C" => str_replace($replacement4,$replacement5,$styles_entry_text_10C),
+		    "21-B" => str_replace($replacement4,$replacement5,$styles_entry_text_21B),
+		    "23-F" => str_replace($replacement4,$replacement5,$styles_entry_text_23F),
+		    "24-C" => str_replace($replacement4,$replacement5,$styles_entry_text_24C),
+		    "25-B" => str_replace($replacement4,$replacement5,$styles_entry_text_25B),
+		    "27-A" => str_replace($replacement4,$replacement5,$styles_entry_text_27A),
+		    "28-A" => str_replace($replacement4,$replacement5,$styles_entry_text_28A),
+		    "28-B" => str_replace($replacement4,$replacement5,$styles_entry_text_28C),
+		    "29-A" => str_replace($replacement4,$replacement5,$styles_entry_text_29A),
+		    "29-B" => str_replace($replacement4,$replacement5,$styles_entry_text_29B),
+		    "29-C" => str_replace($replacement4,$replacement5,$styles_entry_text_29C),
+		    "30-A" => str_replace($replacement4,$replacement5,$styles_entry_text_30A),
+		    "30-B" => str_replace($replacement4,$replacement5,$styles_entry_text_30B),
+		    "30-C" => str_replace($replacement4,$replacement5,$styles_entry_text_30C),
+		    "31-A" => str_replace($replacement4,$replacement5,$styles_entry_text_30A),
+		    "31-B" => str_replace($replacement4,$replacement5,$styles_entry_text_31B),
+		    "32-A" => str_replace($replacement4,$replacement5,$styles_entry_text_32A),
+		    "32-B" => str_replace($replacement4,$replacement5,$styles_entry_text_32B),
+		    "33-A" => str_replace($replacement4,$replacement5,$styles_entry_text_33A),
+		    "33-B" => str_replace($replacement4,$replacement5,$styles_entry_text_33B),
+		    "34-A" => str_replace($replacement4,$replacement5,$styles_entry_text_34A),
+		    "34-B" => str_replace($replacement4,$replacement5,$styles_entry_text_34B),
+		    "34-C" => str_replace($replacement4,$replacement5,$styles_entry_text_34C),
+		    "M1-A" => str_replace($replacement4,$replacement5,$styles_entry_text_M1A),
+		    "M1-B" => str_replace($replacement4,$replacement5,$styles_entry_text_M1B),
+		    "M1-C" => str_replace($replacement4,$replacement5,$styles_entry_text_M1C),
+		    "M2-A" => str_replace($replacement4,$replacement5,$styles_entry_text_M2A),
+		    "M2-B" => str_replace($replacement4,$replacement5,$styles_entry_text_M2B),
+		    "M2-C" => str_replace($replacement4,$replacement5,$styles_entry_text_M2C),
+		    "M2-D" => str_replace($replacement4,$replacement5,$styles_entry_text_M2D),
+		    "M2-E" => str_replace($replacement4,$replacement5,$styles_entry_text_M2E),
+		    "M3-A" => str_replace($replacement4,$replacement5,$styles_entry_text_M3A),
+		    "M3-B" => str_replace($replacement4,$replacement5,$styles_entry_text_M3B),
+		    "M4-A" => str_replace($replacement4,$replacement5,$styles_entry_text_M4A),
+		    "M4-B" => str_replace($replacement4,$replacement5,$styles_entry_text_M4B),
+		    "M4-C" => str_replace($replacement4,$replacement5,$styles_entry_text_M4C),   
+		    "21-B1" => str_replace($replacement4,$replacement5,$styles_entry_text_21X),
+		    "21-B2" => str_replace($replacement4,$replacement5,$styles_entry_text_21X),
+		    "21-B3" => str_replace($replacement4,$replacement5,$styles_entry_text_21X),
+		    "21-B4" => str_replace($replacement4,$replacement5,$styles_entry_text_21X),
+		    "21-B5" => str_replace($replacement4,$replacement5,$styles_entry_text_21X),
+		    "21-B6" => str_replace($replacement4,$replacement5,$styles_entry_text_21X),
+		    "21-B7" => str_replace($replacement4,$replacement5,$styles_entry_text_21X),
+		    "PR-X3" => str_replace($replacement4,$replacement5,$styles_entry_text_PRX3),
+		    "PR-X4" => str_replace($replacement4,$replacement5,$styles_entry_text_PRX4),
+		    "LS-X3" => str_replace($replacement4,$replacement5,$styles_entry_text_PRX3),
+		    "LS-X4" => str_replace($replacement4,$replacement5,$styles_entry_text_PRX4),
+		);
+
+	}
+
+	if ($_SESSION['prefsStyleSet'] == "BJCP2021") {
+
+		$styles_entry_text_cider = array(
+			"C1-A" => str_replace($replacement4,$replacement5,$styles_entry_text_C1A),
+			"C1-B" => str_replace($replacement4,$replacement5,$styles_entry_text_C1B),
+			"C1-C" => str_replace($replacement4,$replacement5,$styles_entry_text_C1C),
+			"C1-E" => str_replace($replacement4,$replacement5,$styles_entry_text_C1E),
+			"C2-A" => str_replace($replacement4,$replacement5,$styles_entry_text_C2A),
+			"C2-B" => str_replace($replacement4,$replacement5,$styles_entry_text_C2B),
+			"C2-C" => str_replace($replacement4,$replacement5,$styles_entry_text_C2C),
+			"C2-D" => str_replace($replacement4,$replacement5,$styles_entry_text_C2D),
+			"C2-E" => str_replace($replacement4,$replacement5,$styles_entry_text_C2E),
+			"C2-F" => str_replace($replacement4,$replacement5,$styles_entry_text_C2F)
+		);
+
+	}
+
+	if ($_SESSION['prefsStyleSet'] == "BJCP2025") {
+
+		$styles_entry_text_cider = array(
+			"C1-A" => str_replace($replacement4,$replacement5,$styles_entry_text_C1A_2025),
+			"C1-B" => str_replace($replacement4,$replacement5,$styles_entry_text_C1B_2025),
+			"C1-C" => str_replace($replacement4,$replacement5,$styles_entry_text_C1C_2025),
+			"C1-D" => str_replace($replacement4,$replacement5,$styles_entry_text_C1D_2025),
+			"C1-E" => str_replace($replacement4,$replacement5,$styles_entry_text_C1E_2025),
+			"C2-A" => str_replace($replacement4,$replacement5,$styles_entry_text_C2A_2025),
+			"C2-B" => str_replace($replacement4,$replacement5,$styles_entry_text_C2B_2025),
+			"C2-C" => str_replace($replacement4,$replacement5,$styles_entry_text_C2C_2025),
+			"C2-D" => str_replace($replacement4,$replacement5,$styles_entry_text_C2D_2025),
+			"C3-A" => str_replace($replacement4,$replacement5,$styles_entry_text_C3A_2025),
+			"C3-B" => str_replace($replacement4,$replacement5,$styles_entry_text_C3B_2025),
+			"C3-C" => str_replace($replacement4,$replacement5,$styles_entry_text_C3C_2025),
+			"C4-A" => str_replace($replacement4,$replacement5,$styles_entry_text_C4A_2025),
+			"C4-B" => str_replace($replacement4,$replacement5,$styles_entry_text_C4B_2025),
+			"C4-C" => str_replace($replacement4,$replacement5,$styles_entry_text_C4C_2025),
+			"C4-D" => str_replace($replacement4,$replacement5,$styles_entry_text_C4D_2025)
+		);
+
+	}
+
+	if (empty($styles_entry_text_cider)) $styles_entry_text = $styles_entry_text;
+	else $styles_entry_text = array_merge($styles_entry_text,$styles_entry_text_cider);
+
 }
 
-elseif (($_SESSION['prefsLanguage'] != "en-US") && (($_SESSION['prefsStyleSet'] == "BJCP2015") || ($_SESSION['prefsStyleSet'] == "BJCP2021"))) {
-	$styles_entry_text = array(
-	    "7-C" => $styles_entry_text_07C,
-	    "9-A" => $styles_entry_text_09A,
-	    "10-C" => $styles_entry_text_10C,
-	    "21-B" => $styles_entry_text_21B,
-	    "23-F" => $styles_entry_text_23F,
-	    "24-C" => $styles_entry_text_24C,
-	    "25-B" => $styles_entry_text_25B,
-	    "27-A" => $styles_entry_text_27A,
-	    "28-A" => $styles_entry_text_28A,
-	    "28-B" => $styles_entry_text_28C,
-	    "29-A" => $styles_entry_text_29A,
-	    "29-B" => $styles_entry_text_29B,
-	    "29-C" => $styles_entry_text_29C,
-	    "30-A" => $styles_entry_text_30A,
-	    "30-B" => $styles_entry_text_30B,
-	    "30-C" => $styles_entry_text_30C,
-	    "31-A" => $styles_entry_text_30A,
-	    "31-B" => $styles_entry_text_31B,
-	    "32-A" => $styles_entry_text_32A,
-	    "32-B" => $styles_entry_text_32B,
-	    "33-A" => $styles_entry_text_33A,
-	    "33-B" => $styles_entry_text_33B,
-	    "34-A" => $styles_entry_text_34A,
-	    "34-B" => $styles_entry_text_34B,
-	    "34-C" => $styles_entry_text_34C,
-	    "M1-A" => $styles_entry_text_M1A,
-	    "M1-B" => $styles_entry_text_M1B,
-	    "M1-C" => $styles_entry_text_M1C,
-	    "M2-A" => $styles_entry_text_M2A,
-	    "M2-B" => $styles_entry_text_M2B,
-	    "M2-C" => $styles_entry_text_M2C,
-	    "M2-D" => $styles_entry_text_M2D,
-	    "M2-E" => $styles_entry_text_M2E,
-	    "M3-A" => $styles_entry_text_M3A,
-	    "M3-B" => $styles_entry_text_M3B,
-	    "M4-A" => $styles_entry_text_M4A,
-	    "M4-B" => $styles_entry_text_M4B,
-	    "M4-C" => $styles_entry_text_M4C,
-	    "C1-E" => $styles_entry_text_C1E,
-	    "C2-A" => $styles_entry_text_C2A,
-	    "C2-B" => $styles_entry_text_C2B,
-	    "C2-C" => $styles_entry_text_C2C,
-	    "C2-D" => $styles_entry_text_C2D,
-	    "C2-E" => $styles_entry_text_C2E,
-	    "C2-F" => $styles_entry_text_C2F,
-	    "21-B1" => $styles_entry_text_21X,
-	    "21-B2" => $styles_entry_text_21X,
-	    "21-B3" => $styles_entry_text_21X,
-	    "21-B4" => $styles_entry_text_21X,
-	    "21-B5" => $styles_entry_text_21X,
-	    "21-B6" => $styles_entry_text_21X,
-	    "21-B7" => $styles_entry_text_21X,
-	    "PR-X3" => $styles_entry_text_PRX3,
-	    "PR-X4" => $styles_entry_text_PRX4,
-	    "LS-X3" => $styles_entry_text_PRX3,
-	    "LS-X4" => $styles_entry_text_PRX4,
-	);
+elseif ($_SESSION['prefsLanguage'] != "en-US") {
+
+	if (($_SESSION['prefsStyleSet'] == "BJCP2021") || ($_SESSION['prefsStyleSet'] == "BJCP2025")) {
+
+		$styles_entry_text = array(
+		    "7-C" => $styles_entry_text_07C,
+		    "9-A" => $styles_entry_text_09A,
+		    "10-C" => $styles_entry_text_10C,
+		    "21-B" => $styles_entry_text_21B,
+		    "23-F" => $styles_entry_text_23F,
+		    "24-C" => $styles_entry_text_24C,
+		    "25-B" => $styles_entry_text_25B,
+		    "27-A" => $styles_entry_text_27A,
+		    "28-A" => $styles_entry_text_28A,
+		    "28-B" => $styles_entry_text_28C,
+		    "29-A" => $styles_entry_text_29A,
+		    "29-B" => $styles_entry_text_29B,
+		    "29-C" => $styles_entry_text_29C,
+		    "30-A" => $styles_entry_text_30A,
+		    "30-B" => $styles_entry_text_30B,
+		    "30-C" => $styles_entry_text_30C,
+		    "31-A" => $styles_entry_text_30A,
+		    "31-B" => $styles_entry_text_31B,
+		    "32-A" => $styles_entry_text_32A,
+		    "32-B" => $styles_entry_text_32B,
+		    "33-A" => $styles_entry_text_33A,
+		    "33-B" => $styles_entry_text_33B,
+		    "34-A" => $styles_entry_text_34A,
+		    "34-B" => $styles_entry_text_34B,
+		    "34-C" => $styles_entry_text_34C,
+		    "M1-A" => $styles_entry_text_M1A,
+		    "M1-B" => $styles_entry_text_M1B,
+		    "M1-C" => $styles_entry_text_M1C,
+		    "M2-A" => $styles_entry_text_M2A,
+		    "M2-B" => $styles_entry_text_M2B,
+		    "M2-C" => $styles_entry_text_M2C,
+		    "M2-D" => $styles_entry_text_M2D,
+		    "M2-E" => $styles_entry_text_M2E,
+		    "M3-A" => $styles_entry_text_M3A,
+		    "M3-B" => $styles_entry_text_M3B,
+		    "M4-A" => $styles_entry_text_M4A,
+		    "M4-B" => $styles_entry_text_M4B,
+		    "M4-C" => $styles_entry_text_M4C,
+		    "21-B1" => $styles_entry_text_21X,
+		    "21-B2" => $styles_entry_text_21X,
+		    "21-B3" => $styles_entry_text_21X,
+		    "21-B4" => $styles_entry_text_21X,
+		    "21-B5" => $styles_entry_text_21X,
+		    "21-B6" => $styles_entry_text_21X,
+		    "21-B7" => $styles_entry_text_21X,
+		    "PR-X3" => $styles_entry_text_PRX3,
+		    "PR-X4" => $styles_entry_text_PRX4,
+		    "LS-X3" => $styles_entry_text_PRX3,
+		    "LS-X4" => $styles_entry_text_PRX4,
+		);
+
+	}
+
+	if ($_SESSION['prefsStyleSet'] == "BJCP2021") {
+
+		$styles_entry_text_cider = array(
+			"C1-A" => $styles_entry_text_C1A,
+			"C1-B" => $styles_entry_text_C1B,
+			"C1-C" => $styles_entry_text_C1C,
+			"C1-E" => $styles_entry_text_C1E,
+			"C2-A" => $styles_entry_text_C2A,
+			"C2-B" => $styles_entry_text_C2B,
+			"C2-C" => $styles_entry_text_C2C,
+			"C2-D" => $styles_entry_text_C2D,
+			"C2-E" => $styles_entry_text_C2E,
+			"C2-F" => $styles_entry_text_C2F
+		);
+
+	}
+
+	if ($_SESSION['prefsStyleSet'] == "BJCP2025") {
+
+		$styles_entry_text_cider = array(
+			"C1-A" => $styles_entry_text_C1A_2025,
+			"C1-B" => $styles_entry_text_C1B_2025,
+			"C1-C" => $styles_entry_text_C1C_2025,
+			"C1-D" => $styles_entry_text_C1D_2025,
+			"C1-D" => $styles_entry_text_C1E_2025,
+			"C2-A" => $styles_entry_text_C2A_2025,
+			"C2-B" => $styles_entry_text_C2B_2025,
+			"C2-C" => $styles_entry_text_C2C_2025,
+			"C2-D" => $styles_entry_text_C2D_2025,
+			"C3-A" => $styles_entry_text_C3A_2025,
+			"C3-B" => $styles_entry_text_C3B_2025,
+			"C3-C" => $styles_entry_text_C3C_2025,
+			"C4-A" => $styles_entry_text_C4A_2025,
+			"C4-B" => $styles_entry_text_C4B_2025,
+			"C4-C" => $styles_entry_text_C4C_2025,
+			"C4-D" => $styles_entry_text_C4D_2025
+		);
+
+	}
+
+	$styles_entry_text = array_merge($styles_entry_text,$styles_entry_text_cider);
+
 }
 
 else $styles_entry_text = array();
 
-// --------------------------------------If BJCP Styles --------------------------------------
+// --------------------------------------If Non-BA Styles --------------------------------------
 
 if ($_SESSION['prefsStyleSet'] != "BA") $styleSet = str_replace("2"," 2",$_SESSION['prefsStyleSet']);
 else $styleSet = $_SESSION['prefsStyleSet'];
@@ -171,7 +251,9 @@ else $styleSet = $_SESSION['prefsStyleSet'];
 if (HOSTED) $query_required_optional = sprintf("SELECT * FROM %s WHERE (brewStyleVersion = '%s' OR brewStyleOwn = 'custom') UNION ALL SELECT * FROM %s WHERE (brewStyleVersion = '%s' OR brewStyleOwn = 'custom')", $styles_db_table, $_SESSION['prefsStyleSet'], $prefix."styles", $_SESSION['prefsStyleSet']);
 else
 */
-$query_required_optional = sprintf("SELECT * FROM %s WHERE (brewStyleVersion = '%s' OR brewStyleOwn = 'custom')", $styles_db_table, $_SESSION['prefsStyleSet']);
+if ($_SESSION['prefsStyleSet'] == "BJCP2025") $query_required_optional = sprintf("SELECT * FROM %s WHERE (brewStyleVersion='BJCP2025' AND brewStyleType='2') OR (brewStyleVersion='BJCP2021' AND brewStyleType !='2') OR brewStyleOwn='custom'", $styles_db_table, $_SESSION['prefsStyleSet']);
+elseif ($_SESSION['prefsStyleSet'] == "AABC2025") $query_required_optional = sprintf("SELECT * FROM %s WHERE (brewStyleVersion='AABC2025' AND brewStyleType='2') OR (brewStyleVersion='AABC2022' AND brewStyleType !='2') OR brewStyleOwn='custom'", $styles_db_table, $_SESSION['prefsStyleSet']);
+else $query_required_optional = sprintf("SELECT * FROM %s WHERE (brewStyleVersion = '%s' OR brewStyleOwn = 'custom')", $styles_db_table, $_SESSION['prefsStyleSet']);
 $required_optional = mysqli_query($connection,$query_required_optional) or die (mysqli_error($connection));
 $row_required_optional = mysqli_fetch_assoc($required_optional);
 $totalRows_required_optional = mysqli_num_rows($required_optional);

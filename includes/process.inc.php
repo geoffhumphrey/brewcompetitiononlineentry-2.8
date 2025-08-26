@@ -261,6 +261,16 @@ if (((isset($_SERVER['HTTP_REFERER'])) && ($referrer['host'] == $_SERVER['SERVER
 			$result = mysqli_query($connection,$updateSQL) or die (mysqli_error($connection));
 
 		}
+
+		if ($_SESSION['prefsStyleSet'] == "BJCP2021") {
+
+			include (INCLUDES.'convert/convert_bjcp_2025.inc.php');
+
+			$updateSQL = sprintf("UPDATE %s SET prefsStyleSet='%s' WHERE id='%s'",$prefix."preferences","BJCP2025","1");
+			mysqli_real_escape_string($connection,$updateSQL);
+			$result = mysqli_query($connection,$updateSQL) or die (mysqli_error($connection));
+
+		}
 		
 		if (session_status() === PHP_SESSION_NONE) {
 			session_name($prefix_session);

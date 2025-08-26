@@ -208,7 +208,7 @@ if ($setup_success) {
 				'prefsUseMods' => 'N',
 				'prefsSEF' => 'N',
 				'prefsSpecialCharLimit' => '200',
-				'prefsStyleSet' => 'BJCP2021',
+				'prefsStyleSet' => 'BJCP2025',
 				'prefsAutoPurge' => '0',
 				'prefsEntryLimitPaid' => NULL,
 				'prefsEmailRegConfirm' => '0',
