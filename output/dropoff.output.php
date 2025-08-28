@@ -53,7 +53,7 @@ if ($go == "default") {  ?>
 
     if (!empty($_SESSION['contestShippingAddress'])) { 
 
-        $location_count = location_count("0");
+        $location_count = location_count(999);
         $all_location_count += $location_count;
 
     ?>
@@ -113,8 +113,9 @@ if ($go == "default") {  ?>
     if (!empty($_SESSION['contestShippingAddress'])) {
 
         $random = random_generator(5,2);
-        $entries_by_dropoff_loc = entries_by_dropoff_loc("0");
-        $location_count = location_count("0");
+        $entries_by_dropoff_loc = entries_by_dropoff_loc(999);
+        $location_count = location_count(999);
+    
     ?>
     <h2><?php if (!empty($_SESSION['contestShippingName'])) echo sprintf("%s (%s)",$_SESSION['contestShippingName'], $label_shipping_location); else echo $label_shipping_location; ?><br><small><?php echo $_SESSION['contestShippingAddress']; ?></small></h2>
     <p class="lead"><?php echo sprintf("%s: %s",$output_text_012,$location_count); ?>*</p>

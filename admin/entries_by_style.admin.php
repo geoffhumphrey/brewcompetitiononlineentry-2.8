@@ -25,14 +25,20 @@ $style_other_count_logged[] = 0;
 
 include (DB.'styles.db.php');
 
-do {
-	if (array_key_exists($row_styles['id'], $styles_selected)) {
-		$accepted_categories[] = $row_styles['brewStyleGroup'];
-	} 
-} while ($row_styles = mysqli_fetch_assoc($styles));
+$total_cat = array();
 
-sort($accepted_categories);
-$total_cat = array_unique($accepted_categories);
+if ($row_styles) {
+
+    do {
+    	if (array_key_exists($row_styles['id'], $styles_selected)) {
+    		$accepted_categories[] = $row_styles['brewStyleGroup'];
+    	} 
+    } while ($row_styles = mysqli_fetch_assoc($styles));
+    
+    sort($accepted_categories);
+    $total_cat = array_unique($accepted_categories);
+
+}
 
 if ($_SESSION['prefsStyleSet'] == "BA") {
 

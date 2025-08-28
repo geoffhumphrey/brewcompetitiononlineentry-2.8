@@ -74,6 +74,7 @@ if ($section == "admin") {
 	elseif ((($action == "edit") || ($action == "add")) && ($go == "judging_tables"))  $styles_query_add = "";
 	elseif ((($action == "default") || ($action == "add"))&& ($go == "styles")) $styles_query_add = "";
 	elseif ((($action == "entries")) && ($go == "preferences")) $styles_query_add = "";
+	elseif (($go == "count_by_style") || ($go == "count_by_substyle")) $styles_query_add = "";
 	else $styles_query_add = " AND id='$id'";
 
 	$query_styles .= $styles_query_add;
