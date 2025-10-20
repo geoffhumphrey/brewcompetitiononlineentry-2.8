@@ -1,8 +1,4 @@
 <?php
-/*
-if (HOSTED) $styles_db_table = "bcoem_shared_styles";
-else
-*/
 $styles_db_table = $prefix."styles";
 
 $add_edit_entry_modals = "";
@@ -101,6 +97,8 @@ if ($_SESSION['prefsLanguage'] == "en-US") {
 
 	}
 
+
+	/*
 	if ($_SESSION['prefsStyleSet'] == "BJCP2025") {
 
 		$styles_entry_text_cider = array(
@@ -121,8 +119,10 @@ if ($_SESSION['prefsLanguage'] == "en-US") {
 			"C4-C" => str_replace($replacement4,$replacement5,$styles_entry_text_C4C_2025),
 			"C4-D" => str_replace($replacement4,$replacement5,$styles_entry_text_C4D_2025)
 		);
-
+		
 	}
+
+	*/
 
 	if (empty($styles_entry_text_cider)) $styles_entry_text = $styles_entry_text;
 	else $styles_entry_text = array_merge($styles_entry_text,$styles_entry_text_cider);
