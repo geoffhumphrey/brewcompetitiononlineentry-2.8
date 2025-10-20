@@ -4424,8 +4424,34 @@ if (!check_new_style("C1","E","Spanish Cider")) include (UPDATE.'styles_bjcp_202
 // Add AABC 2025 Cider Updates
 if (!check_new_style("20","05","Spanish Cider [BJCP C1E]")) include (UPDATE.'styles_aabc_2025_update.php');
 
+if ((check_new_style("20","05","Spanish Cider [BJCP C1E]")) && (check_new_style("C1","E","Spanish Cider"))) $output_run_update .= "<li>Update to 2.8.0 completed.</li>";
+
 // Update NW Cider Cup Styles
 include (UPDATE.'styles_nw_cider_cup_2025.php');
+
+// End unordered list
+if (!$setup_running) $output_run_update .= "</ul>";
+
+/**
+ * ----------------------------------------------- 2.8.1 ---------------------------------------------
+ * No updates
+ * ---------------------------------------------------------------------------------------------------
+ */
+
+if ((!$setup_running) && (!$update_running)) {
+	$output_run_update .= "<p>";
+	$output_run_update .= "<strong>Version 2.8.1.0 Updates</strong>";
+	$output_run_update .= "</p>";
+}
+
+elseif ($update_running) {
+	$output_run_update .= "<h4>Version 2.8.1 </h4>";
+}
+
+// Begin version unordered list
+if (!$setup_running) $output_run_update .= "<ul>";
+
+$output_run_update .= "<li>Update to 2.8.1 completed.</li>";
 
 // End unordered list
 if (!$setup_running) $output_run_update .= "</ul>";
