@@ -122,6 +122,7 @@ else {
 
 		$query_bos = "SELECT * FROM $judging_scores_db_table";
 		if ($mead_cider_combined) $query_bos .= " WHERE (scoreType='2' OR scoreType='3')";
+		elseif ($type == 1) $query_bos .= " WHERE (scoreType='0' OR scoreType='1')";
 		else $query_bos .= " WHERE scoreType='$type'";
 		if ($style_type_info[1] == "1") $query_bos .= " AND scorePlace='1'";
 		if ($style_type_info[1] == "2") $query_bos .= " AND (scorePlace='1' OR scorePlace='2')";
@@ -134,4 +135,5 @@ else {
 	}
 
 }
+
 ?>

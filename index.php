@@ -423,9 +423,7 @@ var session_end_redirect = "<?php echo $base_url; ?>includes/process.inc.php?sec
 ?>
 
 <script type="text/javascript">
-<?php if ($section == "brewer") { ?>
-    var club_other = <?php if ($club_other) echo "true"; else echo "false"; ?>;
-<?php } ?>
+    var club_other = <?php if ((isset($club_other)) && ($club_other)) echo "true"; else echo "false"; ?>;
     var brewer_country = "<?php if (isset($row_brewer)) echo $row_brewer['brewerCountry']; ?>";
     var brewer_judge = "<?php if (isset($row_brewer)) echo $row_brewer['brewerJudge']; ?>";
     var brewer_steward = "<?php if (isset($row_brewer)) echo $row_brewer['brewerSteward']; ?>";
